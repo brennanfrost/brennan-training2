@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brennan Frost — Training Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --bg4: #1e1e28;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f0f5;
+    --text2: #9090a0;
+    --text3: #5a5a6a;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.12);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.12);
+    --red: #ef4444;
+    --red-dim: rgba(239,68,68,0.1);
+    --purple: #a78bfa;
+    --purple-dim: rgba(167,139,250,0.1);
+    --teal: #2dd4bf;
+    --teal-dim: rgba(45,212,191,0.1);
+    --accent-dim: rgba(59,130,246,0.1);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.03em;
+    color: var(--text);
+  }
+  .logo span { color: var(--accent2); }
+  .target-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+  .nav-btn {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: var(--text2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+
+  /* ── MAIN ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── HERO STATS ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+  }
+  .stat-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+  .stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 2px; }
+  .stat-sub { font-size: 11px; color: var(--text2); }
+
+  /* ── SECTION HEADER ── */
+  .sec-header { margin-bottom: 1.25rem; }
+  .sec-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .sec-sub { font-size: 13px; color: var(--text2); }
+
+  /* ── PHASE TABS ── */
+  .phase-tabs { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .phase-tab {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: var(--bg3);
+    color: var(--text2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .phase-tab:hover { color: var(--text); border-color: var(--border2); }
+  .phase-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* ── WEEK CARDS ── */
+  .week-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+  .week-card:hover { border-color: var(--border2); }
+  .week-header {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--bg4);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .week-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: var(--text2); letter-spacing: 0.05em; text-transform: uppercase; }
+  .week-date { font-size: 12px; color: var(--text3); }
+  .week-note { font-size: 12px; color: var(--text2); }
+  .week-chevron { font-size: 12px; color: var(--text3); transition: transform 0.2s; }
+  .week-card.collapsed .week-chevron { transform: rotate(-90deg); }
+  .week-body { display: grid; grid-template-columns: repeat(7, 1fr); border-top: none; }
+  .week-card.collapsed .week-body { display: none; }
+  .day-col { border-right: 1px solid var(--border); padding: 8px 6px; min-height: 70px; }
+  .day-col:last-child { border-right: none; }
+  .day-name { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+  .block {
+    border-radius: 4px;
+    padding: 4px 5px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    position: relative;
+  }
+  .block:hover { opacity: 0.85; }
+  .block.done { opacity: 0.4; }
+  .block.done::after { content: '✓'; position: absolute; top: 2px; right: 4px; font-size: 9px; font-weight: 700; }
+  .bt { font-size: 9px; font-weight: 700; line-height: 1.2; }
+  .bd { font-size: 8px; line-height: 1.3; opacity: 0.8; margin-top: 1px; }
+
+  /* Block colors */
+  .gym-sq  { background: rgba(34,197,94,0.15);  border-left: 2px solid #22c55e; } .gym-sq  .bt { color: #4ade80; }
+  .gym-pp  { background: rgba(59,130,246,0.15); border-left: 2px solid #3b82f6; } .gym-pp  .bt { color: #60a5fa; }
+  .gym-hi  { background: rgba(167,139,250,0.15);border-left: 2px solid #a78bfa; } .gym-hi  .bt { color: #c4b5fd; }
+  .gym-lt  { background: rgba(100,100,120,0.2); border-left: 2px solid #666680; } .gym-lt  .bt { color: #9090b0; }
+  .cyc-z2  { background: rgba(45,212,191,0.12); border-left: 2px solid #2dd4bf; } .cyc-z2  .bt { color: #5eead4; }
+  .cyc-th  { background: rgba(245,158,11,0.15); border-left: 2px solid #f59e0b; } .cyc-th  .bt { color: #fbbf24; }
+  .cyc-iv  { background: rgba(239,68,68,0.12);  border-left: 2px solid #ef4444; } .cyc-iv  .bt { color: #f87171; }
+  .cyc-op  { background: rgba(244,114,182,0.12);border-left: 2px solid #f472b6; } .cyc-op  .bt { color: #f9a8d4; }
+  .cyc-long{ background: rgba(74,222,128,0.1);  border-left: 2px solid #4ade80; } .cyc-long .bt { color: #86efac; }
+  .race-tune{background: rgba(251,146,60,0.15); border-left: 2px solid #fb923c; } .race-tune .bt { color: #fdba74; }
+  .race-main{background: rgba(59,130,246,0.25); border-left: 2px solid #60a5fa; } .race-main .bt { color: #93c5fd; }
+  .rest-bl { background: rgba(255,255,255,0.03);border-left: 2px solid #333340; } .rest-bl  .bt { color: var(--text3); }
+  .taper-bl{ background: rgba(239,68,68,0.08);  border-left: 2px solid #7f1d1d; } .taper-bl .bt { color: #fca5a5; }
+
+  /* ── GYM PLAN ── */
+  .gym-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  .gym-table th {
+    text-align: left; padding: 8px 12px;
+    background: var(--bg4); border-bottom: 1px solid var(--border2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text2);
+  }
+  .gym-table td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top; font-size: 13px; color: var(--text);
+  }
+  .gym-table tr:hover td { background: var(--bg4); }
+  .wk-cell { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--text2); font-size: 12px; white-space: nowrap; }
+  .lift-name { font-weight: 600; color: var(--text); }
+  .lift-load { font-size: 12px; color: var(--accent2); font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.02em; }
+  .lift-note { font-size: 11px; color: var(--text3); font-style: italic; margin-top: 2px; }
+  .phase-badge {
+    display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 3px; margin-bottom: 4px;
+  }
+  .pb-base   { background: rgba(34,197,94,0.15);  color: #4ade80; }
+  .pb-build  { background: rgba(167,139,250,0.15); color: #c4b5fd; }
+  .pb-power  { background: rgba(245,158,11,0.15);  color: #fbbf24; }
+  .pb-recover{ background: rgba(45,212,191,0.12);  color: #5eead4; }
+  .pb-taper  { background: rgba(239,68,68,0.1);    color: #fca5a5; }
+
+  /* ── MEAL PLAN ── */
+  .meal-timeline { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; }
+  .meal-row { display: grid; grid-template-columns: 90px 1fr; border-bottom: 1px solid var(--border); }
+  .meal-row:last-child { border-bottom: none; }
+  .meal-time { padding: 12px 14px; background: var(--bg4); border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+  .meal-time-main { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; color: var(--text); }
+  .meal-time-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+  .meal-content { padding: 12px 14px; }
+  .meal-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; margin-bottom: 5px; }
+  .mt-pre    { background: rgba(245,158,11,0.15);  color: #fbbf24; }
+  .mt-gym    { background: rgba(34,197,94,0.15);   color: #4ade80; }
+  .mt-meal   { background: rgba(59,130,246,0.15);  color: #60a5fa; }
+  .mt-ride   { background: rgba(167,139,250,0.15); color: #c4b5fd; }
+  .mt-post   { background: rgba(45,212,191,0.12);  color: #5eead4; }
+  .mt-stop   { background: rgba(100,100,120,0.2);  color: #9090b0; }
+  .meal-food { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 3px; }
+  .meal-macros { font-size: 11px; color: var(--accent2); font-family: 'Barlow Condensed', sans-serif; font-weight: 600; }
+  .meal-note { font-size: 11px; color: var(--text3); font-style: italic; margin-top: 3px; }
+
+  .dinner-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .dinner-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .dinner-head { padding: 8px 12px; background: var(--bg4); border-bottom: 1px solid var(--border); font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent2); }
+  .dinner-body { padding: 10px 12px; }
+  .dinner-item { font-size: 12px; color: var(--text); line-height: 1.6; }
+  .dinner-cal { font-size: 11px; color: var(--text2); margin-top: 6px; font-style: italic; }
+
+  /* ── RACE DAY ── */
+  .race-timeline { border: 1px solid rgba(59,130,246,0.3); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; }
+  .race-row { display: grid; grid-template-columns: 110px 1fr; border-bottom: 1px solid var(--border); }
+  .race-row:last-child { border-bottom: none; }
+  .race-time { padding: 12px 14px; background: rgba(59,130,246,0.07); border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+  .race-time-main { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; color: var(--accent2); }
+  .race-time-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+  .race-content { padding: 12px 14px; }
+  .race-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); margin-bottom: 4px; }
+  .race-detail { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .race-note { font-size: 11px; color: var(--text3); font-style: italic; margin-top: 3px; }
+
+  .info-box { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .info-box-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text2); margin-bottom: 8px; }
+  .info-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 13px; }
+  .info-key { font-weight: 600; color: var(--accent2); min-width: 80px; }
+  .info-val { color: var(--text2); }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap { background: var(--bg4); border-radius: 4px; height: 6px; margin-top: 6px; overflow: hidden; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--teal)); border-radius: 4px; transition: width 0.5s ease; }
+
+  /* ── LEGEND ── */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.25rem; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── PHASE BANNER ── */
+  .phase-banner { border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; border: 1px solid; }
+  .phase-banner h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.03em; margin-bottom: 4px; }
+  .phase-banner p { font-size: 12px; line-height: 1.6; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .dinner-grid { grid-template-columns: 1fr; }
+    .week-note { display: none; }
+    .nav-btn { padding: 12px 12px; font-size: 11px; }
+  }
+  @media (max-width: 500px) {
+    .week-body { grid-template-columns: repeat(7,1fr); }
+    .bt { font-size: 7px; } .bd { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">BRENNAN <span>FROST</span></div>
+    <div class="target-badge"><div class="dot"></div>Salt Lake Crit · Aug 15</div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('calendar')">Calendar</button>
+    <button class="nav-btn" onclick="showSection('gym')">Gym Plan</button>
+    <button class="nav-btn" onclick="showSection('meal')">Meal Plan</button>
+    <button class="nav-btn" onclick="showSection('race')">Race Day</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CALENDAR SECTION
+════════════════════════════════════════════════════════════════════════ -->
+<div id="section-calendar" class="section active">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Current FTP</div>
+      <div class="stat-val">230<span style="font-size:16px;color:var(--text2)">w</span></div>
+      <div class="stat-sub">Target: 250w by Aug</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Current Weight</div>
+      <div class="stat-val">206<span style="font-size:16px;color:var(--text2)">lbs</span></div>
+      <div class="stat-sub">Target: 190 lbs by Aug 15</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Current w/kg</div>
+      <div class="stat-val">2.47</div>
+      <div class="stat-sub">Target: ~3.0 w/kg</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Race Day</div>
+      <div class="stat-val" id="days-out">—</div>
+      <div class="stat-sub">days until Aug 15</div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+    </div>
+  </div>
+
+  <div class="sec-header">
+    <div class="sec-title">Training Calendar</div>
+    <div class="sec-sub">Click any workout block to mark it complete. Click week headers to collapse.</div>
+  </div>
+
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="filterPhase(0)">All phases</button>
+    <button class="phase-tab" onclick="filterPhase(1)">Phase 1 — Base (Apr–May)</button>
+    <button class="phase-tab" onclick="filterPhase(2)">Phase 2 — Build (Jun–Jul)</button>
+    <button class="phase-tab" onclick="filterPhase(3)">Phase 3 — Taper (Aug)</button>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Gym — squat</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Gym — push/pull</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>Gym — hinge</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2dd4bf"></div>Z2 / easy ride</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Tempo / threshold</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Intervals</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fb923c"></div>Tune-up race</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div>Target race</div>
+  </div>
+
+  <div id="calendar-weeks"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     GYM SECTION
+════════════════════════════════════════════════════════════════════════ -->
+<div id="section-gym" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Gym Plan</div>
+    <div class="sec-sub">Mon: Push/Pull · Tue: Squat · Fri: Hinge (optional) · Click rows to mark complete</div>
+  </div>
+
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="filterGym(0)">Phase 1 — Base</button>
+    <button class="phase-tab" onclick="filterGym(1)">Phase 2 — Power</button>
+    <button class="phase-tab" onclick="filterGym(2)">Phase 3 — Taper</button>
+  </div>
+
+  <div id="gym-phases"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     MEAL SECTION
+════════════════════════════════════════════════════════════════════════ -->
+<div id="section-meal" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Meal Plan</div>
+    <div class="sec-sub">Breakfast and lunch identical every day. Only dinner changes.</div>
+  </div>
+
+  <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="stat-card"><div class="stat-label">Protein / day</div><div class="stat-val">185<span style="font-size:16px;color:var(--text2)">g</span></div><div class="stat-sub">0.9g per lb bodyweight</div></div>
+    <div class="stat-card"><div class="stat-label">Training days</div><div class="stat-val">2,400<span style="font-size:14px;color:var(--text2)">cal</span></div><div class="stat-sub">Mon/Tue/Wed/Thu/Sat</div></div>
+    <div class="stat-card"><div class="stat-label">Rest days</div><div class="stat-val">2,000<span style="font-size:14px;color:var(--text2)">cal</span></div><div class="stat-sub">Fri + non-race Sun</div></div>
+    <div class="stat-card"><div class="stat-label">Weight goal</div><div class="stat-val">190<span style="font-size:16px;color:var(--text2)">lbs</span></div><div class="stat-sub">by Aug 15</div></div>
+  </div>
+
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="filterMeal('schedule')">Daily schedule</button>
+    <button class="phase-tab" onclick="filterMeal('dinner')">Dinner rotation</button>
+    <button class="phase-tab" onclick="filterMeal('grocery')">Grocery list</button>
+  </div>
+
+  <div id="meal-schedule">
+    <div class="meal-timeline">
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">6:15 am</div><div class="meal-time-sub">Pre-gym</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-pre">Pre-gym</div>
+          <div class="meal-food">1 banana — eat before leaving the house</div>
+          <div class="meal-macros">~100 cal · 27g carbs</div>
+          <div class="meal-note">Keep banana on your nightstand so you can't miss it</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">6:30 am</div><div class="meal-time-sub">Gym</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-gym">Gym session</div>
+          <div class="meal-food">Mon: Push/pull · Tue: Squat · Fri: Hinge</div>
+          <div class="meal-note">Water only — no sports drink needed for gym</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">8:00 am</div><div class="meal-time-sub">Breakfast</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-meal">Breakfast — same every day</div>
+          <div class="meal-food">4 whole eggs scrambled · 3 slices sourdough toast · 1 tbsp butter or olive oil · Black coffee</div>
+          <div class="meal-macros">~620 cal · 32g protein · 48g carbs · 28g fat</div>
+          <div class="meal-note">Eat within 30 min of finishing gym</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">12:00 pm</div><div class="meal-time-sub">Lunch</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-meal">Lunch — same every day</div>
+          <div class="meal-food">6oz chicken breast (batch cooked Sunday) · 1 cup white rice · 2 cups mixed greens + cucumber + tomatoes · 1 tbsp olive oil + lemon dressing</div>
+          <div class="meal-macros">~600 cal · 55g protein · 45g carbs · 14g fat</div>
+          <div class="meal-note">Cook 5 chicken breasts Sunday night — reheat daily in 2 min</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">3:00 pm</div><div class="meal-time-sub">Pre-ride</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-pre">Pre-ride snack</div>
+          <div class="meal-food">1 banana + 2 rice cakes with honey</div>
+          <div class="meal-macros">~280 cal · 60g carbs</div>
+          <div class="meal-note">Pure carbs — fuels the 4pm ride. Rest days: banana only or skip.</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">4:00 pm</div><div class="meal-time-sub">Ride</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-ride">Bike session</div>
+          <div class="meal-food">Z2 / intervals / race depending on day</div>
+          <div class="meal-note">Electrolyte bottle for rides over 60 min. Gel at 1hr mark for 90+ min rides.</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">5:30 pm</div><div class="meal-time-sub">Post-ride</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-post">Recovery shake</div>
+          <div class="meal-food">1 scoop protein powder + 1 cup milk + 1 banana — blended</div>
+          <div class="meal-macros">~300 cal · 30g protein · 35g carbs</div>
+          <div class="meal-note">Within 20 min of finishing. Skip entirely on rest days.</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">7:00 pm</div><div class="meal-time-sub">Dinner</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-meal">Dinner — rotates</div>
+          <div class="meal-food">Protein + vegetable + starch · See dinner rotation tab</div>
+          <div class="meal-macros">~550–650 cal · 45–50g protein</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-time"><div class="meal-time-main">9:00 pm</div><div class="meal-time-sub">Cut off</div></div>
+        <div class="meal-content">
+          <div class="meal-tag mt-stop">Kitchen closed</div>
+          <div class="meal-food">Water or herbal tea only after 9pm</div>
+          <div class="meal-note">Hard stop — remove the temptation entirely</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="meal-dinner" style="display:none">
+    <div class="dinner-grid">
+      <div class="dinner-card"><div class="dinner-head">Monday — Salmon</div><div class="dinner-body"><div class="dinner-item">Salmon fillet 6oz — baked or pan seared<br>Sweet potato 1 medium — roasted<br>Asparagus or green beans — steamed<br>Lemon + garlic, no heavy sauce</div><div class="dinner-cal">~620 cal · 48g protein</div></div></div>
+      <div class="dinner-card"><div class="dinner-head">Tuesday — Ground beef</div><div class="dinner-body"><div class="dinner-item">Lean ground beef 5oz (93% lean)<br>White rice 3/4 cup cooked<br>Zucchini or bell peppers — sautéed<br>Salsa or low sodium soy sauce</div><div class="dinner-cal">~600 cal · 46g protein</div></div></div>
+      <div class="dinner-card"><div class="dinner-head">Wednesday — Turkey</div><div class="dinner-body"><div class="dinner-item">Ground turkey 6oz — seasoned<br>Roasted potatoes 1 cup<br>Broccoli — roasted<br>Mustard or hot sauce</div><div class="dinner-cal">~580 cal · 50g protein</div></div></div>
+      <div class="dinner-card"><div class="dinner-head">Thursday — Chicken thighs</div><div class="dinner-body"><div class="dinner-item">Chicken thighs 6oz — baked<br>Brown rice 3/4 cup cooked<br>Mixed veg — whatever is in the fridge<br>Garlic, herbs, light olive oil</div><div class="dinner-cal">~620 cal · 44g protein</div></div></div>
+      <div class="dinner-card"><div class="dinner-head">Friday — Light day</div><div class="dinner-body"><div class="dinner-item">Tilapia or cod 6oz — baked<br>Cauliflower rice — unlimited<br>Large mixed salad<br>Salsa or light vinaigrette</div><div class="dinner-cal">~480 cal · 48g protein — lower starch, rest day</div></div></div>
+      <div class="dinner-card"><div class="dinner-head">Saturday — Refuel</div><div class="dinner-body"><div class="dinner-item">Steak or salmon 7oz<br>White rice 1 cup cooked<br>Roasted veg — large portion<br>Earned after the long ride</div><div class="dinner-cal">~680 cal · 52g protein</div></div></div>
+      <div class="dinner-card"><div class="dinner-head">Sunday — Pasta night</div><div class="dinner-body"><div class="dinner-item">Chicken breast 6oz or ground turkey<br>Pasta 1.5 cups cooked<br>Marinara — low sugar jarred sauce<br>Side salad</div><div class="dinner-cal">~650 cal · 50g protein</div></div></div>
+    </div>
+  </div>
+
+  <div id="meal-grocery" style="display:none">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div class="info-box">
+        <div class="info-box-title">Proteins</div>
+        <div style="font-size:13px;color:var(--text2);line-height:2">Chicken breasts 3–4 lbs<br>Eggs x24<br>Protein powder<br>Milk (for shakes)<br>Salmon x2 fillets<br>Ground turkey 1 lb<br>Lean ground beef 1 lb<br>Tilapia or cod x2<br>1 steak</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Carbs + Produce</div>
+        <div style="font-size:13px;color:var(--text2);line-height:2">Sourdough bread 1 loaf<br>White rice 5 lb bag<br>Bananas x14<br>Rice cakes x1 pack<br>Sweet potatoes x2<br>Potatoes x4<br>Mixed greens x2 bags<br>Broccoli, asparagus, zucchini<br>Cherry tomatoes + cucumber</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Pantry</div>
+        <div style="font-size:13px;color:var(--text2);line-height:2">Olive oil + butter<br>Honey<br>Lemons<br>Electrolyte packets<br>Energy gels x4–6<br>Salsa<br>Low sodium soy sauce<br>Mustard + hot sauce<br>Black coffee</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     RACE DAY SECTION
+════════════════════════════════════════════════════════════════════════ -->
+<div id="section-race" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Race Day — Salt Lake Criterium</div>
+    <div class="sec-sub">August 15 · Cat 4/5 · 40 minutes · Simple rectangle course</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Race duration</div><div class="stat-val">40<span style="font-size:16px;color:var(--text2)">min</span></div><div class="stat-sub">Cat 4/5 criterium</div></div>
+    <div class="stat-card"><div class="stat-label">Course</div><div class="stat-val" style="font-size:18px">Rectangle</div><div class="stat-sub">Simple 4-corner layout</div></div>
+    <div class="stat-card"><div class="stat-label">Landing fee</div><div class="stat-val">$75</div><div class="stat-sub">Confirmed — contact Shannon</div></div>
+    <div class="stat-card"><div class="stat-label">Target result</div><div class="stat-val" style="font-size:18px">Top 10</div><div class="stat-sub">3 upgrade points</div></div>
+  </div>
+
+  <div class="sec-title" style="font-size:16px;margin-bottom:1rem">Race day nutrition timing</div>
+  <div class="race-timeline">
+    <div class="race-row"><div class="race-time"><div class="race-time-main">3 hrs pre</div><div class="race-time-sub">~7:00 am</div></div><div class="race-content"><div class="race-label">Breakfast — same as always</div><div class="race-detail">4 eggs scrambled + 3 slices sourdough toast + coffee · ~620 cal</div><div class="race-note">Familiar food — no surprises on race day</div></div></div>
+    <div class="race-row"><div class="race-time"><div class="race-time-main">60 min pre</div></div><div class="race-content"><div class="race-label">Top off glycogen</div><div class="race-detail">1 banana + 1 rice cake with honey · ~200 cal pure carbs</div><div class="race-note">Easy on the stomach</div></div></div>
+    <div class="race-row"><div class="race-time"><div class="race-time-main">Warm up</div><div class="race-time-sub">20 min pre</div></div><div class="race-content"><div class="race-label">Electrolytes</div><div class="race-detail">Sip electrolyte drink during warmup — not plain water</div><div class="race-note">Optional: 1 gel 15 min before the start gun</div></div></div>
+    <div class="race-row"><div class="race-time"><div class="race-time-main">During</div><div class="race-time-sub">40 min crit</div></div><div class="race-content"><div class="race-label">Nothing needed</div><div class="race-detail">No eating required for a 40 min crit — just race</div><div class="race-note">Gel at 20 min ONLY if you feel it fading badly</div></div></div>
+    <div class="race-row"><div class="race-time"><div class="race-time-main">Post race</div><div class="race-time-sub">within 20 min</div></div><div class="race-content"><div class="race-label">Recovery shake</div><div class="race-detail">Protein powder + milk + banana · ~300 cal</div><div class="race-note">Start recovery immediately</div></div></div>
+    <div class="race-row"><div class="race-time"><div class="race-time-main">1–2 hrs post</div></div><div class="race-content"><div class="race-label">Full recovery meal</div><div class="race-detail">Steak or salmon 7oz + white rice + roasted veg · ~680 cal</div><div class="race-note">You earned it</div></div></div>
+  </div>
+
+  <div class="sec-title" style="font-size:16px;margin-bottom:1rem">Race day tactics</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:1.5rem">
+    <div class="info-box"><div class="info-box-title">Positioning</div><div style="font-size:13px;color:var(--text2);line-height:1.8">Stay top third of the field — never the back. The accordion effect at the back costs huge energy. Move up on the straights, not through corners.</div></div>
+    <div class="info-box"><div class="info-box-title">Cornering</div><div style="font-size:13px;color:var(--text2);line-height:1.8">Brake before the corner, not in it. Carry speed through and accelerate out. On a rectangle course you'll do this hundreds of times — smooth is fast.</div></div>
+    <div class="info-box"><div class="info-box-title">Pacing</div><div style="font-size:13px;color:var(--text2);line-height:1.8">Don't go all-in on lap one. Settle in, find a wheel, and save something for the final 5–10 min. The race is decided in the last 2–3 laps.</div></div>
+    <div class="info-box"><div class="info-box-title">Wind strategy</div><div style="font-size:13px;color:var(--text2);line-height:1.8">At 206 lbs you push more air than lighter riders. Stay sheltered on headwind straights — sit in the bunch and let others do the work.</div></div>
+    <div class="info-box"><div class="info-box-title">The finish</div><div style="font-size:13px;color:var(--text2);line-height:1.8">Start moving up with 2 laps to go. The final sprint in a crit starts earlier than people expect. Don't get boxed in — move to the outside in the last lap.</div></div>
+    <div class="info-box"><div class="info-box-title">Pre-race week</div><div style="font-size:13px;color:var(--text2);line-height:1.8">Aug 12–14: add 50–75g extra carbs/day. Reduce fiber the day before. No alcohol that week. Last gym session Aug 12 (Tuesday activation only).</div></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const weeks = [
+  {wk:'Wk 1',date:'Apr 14',phase:1,note:'Race Sunday — American Prep School',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 165/185×8'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat',d:'225/255×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 275/310×8'},{c:'cyc-op',t:'Openers',d:'30 min'}]},
+    {n:'Sat',blocks:[{c:'rest-bl',t:'Rest'}]},
+    {n:'Sun',blocks:[{c:'race-tune',t:'Race',d:'American Prep'}]}
+  ]},
+  {wk:'Wk 2',date:'Apr 21',phase:1,note:'Race Saturday — Veterans Memorial',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 170/190×8'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat',d:'235/260×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-th',t:'Tempo',d:'75 min 2×15'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge — light',d:'DL 280/315×8'},{c:'cyc-op',t:'Openers',d:'30 min'}]},
+    {n:'Sat',blocks:[{c:'race-tune',t:'Race',d:'Veterans Memorial'}]},
+    {n:'Sun',blocks:[{c:'cyc-z2',t:'Easy spin',d:'45 min flush'}]}
+  ]},
+  {wk:'Wk 3',date:'Apr 28',phase:1,note:'Race Tuesday — America First Field',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 170/190×8'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat',d:'235/265×8'},{c:'race-tune',t:'Race',d:'America First'}]},
+    {n:'Wed',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 280/315×8'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'90 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'2.5h Z2'}]}
+  ]},
+  {wk:'Wk 4',date:'May 5',phase:1,note:'Race Tuesday — Utah State Fair Park',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 175/195×8'}]},
+    {n:'Tue',blocks:[{c:'race-tune',t:'Race',d:'Utah State Fair'},{c:'gym-sq',t:'Squat',d:'240/270×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 285/320×8'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'90 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3h Z2 + surges'}]}
+  ]},
+  {wk:'Wk 5',date:'May 12',phase:1,note:'Race Tuesday — America First Field',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 175/195×8'}]},
+    {n:'Tue',blocks:[{c:'race-tune',t:'Race',d:'America First'},{c:'gym-sq',t:'Squat',d:'240/270×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-iv',t:'Intervals',d:'5×5 min VO2'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 285/320×8'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3h + surges'}]}
+  ]},
+  {wk:'Wk 6',date:'May 19',phase:1,note:'Race Tuesday — America First Field',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 180/200×8'}]},
+    {n:'Tue',blocks:[{c:'race-tune',t:'Race',d:'America First'},{c:'gym-sq',t:'Squat',d:'245/275×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-iv',t:'Sprints',d:'10×30s crits'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 290/325×8'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3h w/ 3×10 tempo'}]}
+  ]},
+  {wk:'Wk 7',date:'May 26',phase:1,note:'Race Tuesday — Utah State Fair. Epic program ends.',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 180/200×8'}]},
+    {n:'Tue',blocks:[{c:'race-tune',t:'Race',d:'Utah State Fair'},{c:'gym-sq',t:'Squat',d:'245/275×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-th',t:'Threshold',d:'90 min 2×20 FTP'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 290/325×8'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3h Z2'}]}
+  ]},
+  {wk:'Wk 8',date:'Jun 2',phase:2,note:'New gym program — 6-rep sets, power work begins',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 185/205×6'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat — 6s',d:'250/280×6'}]},
+    {n:'Wed',blocks:[{c:'cyc-iv',t:'Intervals',d:'6×5 min VO2'}]},
+    {n:'Thu',blocks:[{c:'cyc-iv',t:'Sprints',d:'12×30s crit efforts'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge — 6s',d:'DL 295/330×6'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3.5h + surges'}]}
+  ]},
+  {wk:'Wk 9',date:'Jun 9',phase:2,note:'Pure build — heaviest combined training week',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 185/205×6'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat',d:'255/285×6'}]},
+    {n:'Wed',blocks:[{c:'cyc-th',t:'Threshold',d:'90 min 2×20 FTP'}]},
+    {n:'Thu',blocks:[{c:'cyc-iv',t:'Sprints',d:'12×30s crit efforts'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 300/335×6'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3.5h + surges'}]}
+  ]},
+  {wk:'Wk 10',date:'Jun 16',phase:2,note:'Add jump squats — power conversion begins',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 185/205×6'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat + jumps',d:'255/285×6 + 3×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-iv',t:'Race sim',d:'40 min full gas'}]},
+    {n:'Thu',blocks:[{c:'cyc-iv',t:'Sprints',d:'10×30s + 5×10s max'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 300/335×6'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3h w/ 3×10 tempo'}]}
+  ]},
+  {wk:'Wk 11',date:'Jun 23',phase:2,note:'Recovery week — do not skip or add extra work',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-lt',t:'Push/pull easy',d:'Bench 165/180×8'}]},
+    {n:'Tue',blocks:[{c:'gym-lt',t:'Squat easy',d:'225/245×8'}]},
+    {n:'Wed',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-lt',t:'Hinge easy',d:'DL 265/295×8'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride easy',d:'2.5h Z2'}]}
+  ]},
+  {wk:'Wk 12',date:'Jun 30',phase:2,note:'5-rep peak strength block begins',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 185/205×5'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat — 5s',d:'255/285×5'}]},
+    {n:'Wed',blocks:[{c:'cyc-iv',t:'Intervals',d:'6×5 min VO2'}]},
+    {n:'Thu',blocks:[{c:'cyc-iv',t:'Sprints',d:'12×30s crit efforts'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge — 5s',d:'DL 300/340×5'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3.5h + surges'}]}
+  ]},
+  {wk:'Wk 13',date:'Jul 7',phase:2,note:'Peak strength — FTP test recommended this week',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 185/205×5'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat',d:'260/285×5'}]},
+    {n:'Wed',blocks:[{c:'cyc-th',t:'FTP test + 2×20',d:'90 min threshold'}]},
+    {n:'Thu',blocks:[{c:'cyc-iv',t:'Race sim',d:'40 min full gas'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 305/345×5'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'3.5h w/ 3×10 tempo'}]}
+  ]},
+  {wk:'Wk 14',date:'Jul 14',phase:2,note:'Contrast training — most powerful week',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull',d:'Bench 185/205×5'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Contrast squats',d:'Jumps 3×6 + 255/280×5'}]},
+    {n:'Wed',blocks:[{c:'cyc-iv',t:'Sprints',d:'8×30s stay sharp'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge',d:'DL 300/340×5'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'75 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-long',t:'Long ride',d:'2.5h begin reducing'}]}
+  ]},
+  {wk:'Wk 15',date:'Jul 21',phase:3,note:'Taper begins — drop volume, keep intensity',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull 2 sets',d:'Bench 180/200×6'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat 2 sets',d:'245/270×6'}]},
+    {n:'Wed',blocks:[{c:'cyc-iv',t:'Sprints',d:'6×20s max effort'}]},
+    {n:'Thu',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge optional',d:'DL 285/315×6 2 sets'}]},
+    {n:'Sat',blocks:[{c:'cyc-z2',t:'Easy ride',d:'60 min Z2'}]},
+    {n:'Sun',blocks:[{c:'cyc-z2',t:'Easy ride',d:'90 min Z2'}]}
+  ]},
+  {wk:'Wk 16',date:'Jul 28',phase:3,note:'Volume drops further — last serious gym week',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull 2 sets',d:'Bench 180/200×5'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat 2 sets',d:'245/270×5'}]},
+    {n:'Wed',blocks:[{c:'taper-bl',t:'Taper ride',d:'45 min + 4×10s'}]},
+    {n:'Thu',blocks:[{c:'taper-bl',t:'Taper ride',d:'30 min easy'}]},
+    {n:'Fri',blocks:[{c:'gym-hi',t:'Hinge 2 sets',d:'DL 285/310×5'}]},
+    {n:'Sat',blocks:[{c:'rest-bl',t:'Rest'}]},
+    {n:'Sun',blocks:[{c:'cyc-z2',t:'Easy spin',d:'30 min flush'}]}
+  ]},
+  {wk:'Wk 17',date:'Aug 4',phase:3,note:'Last heavy gym Aug 5 — trust the taper',
+   days:[
+    {n:'Mon',blocks:[{c:'gym-pp',t:'Push/pull light',d:'Bench 175/195×4'}]},
+    {n:'Tue',blocks:[{c:'gym-sq',t:'Squat light',d:'235/260×4 2 sets'}]},
+    {n:'Wed',blocks:[{c:'taper-bl',t:'Taper ride',d:'45 min + punches'}]},
+    {n:'Thu',blocks:[{c:'taper-bl',t:'Taper ride',d:'30 min easy'}]},
+    {n:'Fri',blocks:[{c:'gym-lt',t:'Hinge skip/light',d:'1 set optional'}]},
+    {n:'Sat',blocks:[{c:'rest-bl',t:'Rest'}]},
+    {n:'Sun',blocks:[{c:'cyc-z2',t:'Easy spin',d:'30 min flush'}]}
+  ]},
+  {wk:'Race Wk',date:'Aug 11',phase:3,note:'Light activation Tue only. Race Sunday Aug 15.',
+   days:[
+    {n:'Mon',blocks:[{c:'rest-bl',t:'Rest'}]},
+    {n:'Tue',blocks:[{c:'gym-lt',t:'Squat only',d:'185/205×5 activation'}]},
+    {n:'Wed',blocks:[{c:'rest-bl',t:'Rest'}]},
+    {n:'Thu',blocks:[{c:'taper-bl',t:'Openers',d:'30 min + 3×10s'}]},
+    {n:'Fri',blocks:[{c:'rest-bl',t:'Rest'}]},
+    {n:'Sat',blocks:[{c:'rest-bl',t:'Rest'}]},
+    {n:'Sun',blocks:[{c:'race-main',t:'SALT LAKE CRIT',d:'Aug 15 — race day!'}]}
+  ]}
+];
+
+const gymPhases = [
+  {
+    label:'Phase 1 · Apr 16 – May 31',
+    title:'Strength base — follow Epic Fitness program exactly',
+    desc:'Progress main lift loads 5–10 lbs every 1–2 weeks. Keep all ramp, core, accessories, and regen unchanged.',
+    color:'var(--green)',
+    rows:[
+      {wk:'Wk 1–2',squat:'225/255×8 → 235/260×8',bench:'165/185×8 → 170/190×8',dl:'275/310×8 → 280/315×8',badge:'pb-base',note:'Establish baseline'},
+      {wk:'Wk 3–4',squat:'235/265×8 → 240/270×8',bench:'170/190×8 → 175/195×8',dl:'280/315×8 → 285/320×8',badge:'pb-base',note:'Race weeks — manage Tue fatigue'},
+      {wk:'Wk 5–6',squat:'240/270×8 → 245/275×8',bench:'175/195×8 → 180/200×8',dl:'285/320×8 → 290/325×8',badge:'pb-base',note:'Races count as interval sessions'},
+      {wk:'Wk 7',squat:'245/275×8',bench:'180/200×8',dl:'290/325×8',badge:'pb-base',note:'Epic program ends — talk to trainer about June'},
+    ]
+  },
+  {
+    label:'Phase 2 · Jun 2 – Jul 27',
+    title:'Power conversion — shift from strength to explosiveness',
+    desc:'Reps drop to 6 then 5. Add jump squats weeks 10 and 14. Ask trainer for contrast training.',
+    color:'var(--purple)',
+    rows:[
+      {wk:'Wk 8–9',squat:'250/280×6 → 255/285×6',bench:'185/205×6',dl:'295/330×6 → 300/335×6',badge:'pb-build',note:'Drop to 6 reps — heavier, faster intent'},
+      {wk:'Wk 10',squat:'255/285×6 + jump squats 3×8',bench:'185/205×6',dl:'300/335×6',badge:'pb-power',note:'Add jump squats after main squat'},
+      {wk:'Wk 11',squat:'225/245×8 — DELOAD',bench:'165/180×8 — DELOAD',dl:'265/295×8 — DELOAD',badge:'pb-recover',note:'Recovery week — lower loads, no extras'},
+      {wk:'Wk 12–13',squat:'255/285×5 → 260/285×5',bench:'185/205×5',dl:'300/340×5 → 305/345×5',badge:'pb-power',note:'5-rep peak strength — FTP test week 13'},
+      {wk:'Wk 14',squat:'Jumps 3×6 + 255/280×5',bench:'185/205×5',dl:'300/340×5',badge:'pb-power',note:'Contrast training — most powerful week'},
+    ]
+  },
+  {
+    label:'Phase 3 · Jul 28 – Aug 15',
+    title:'Taper — maintain sharpness, protect the legs',
+    desc:'Volume cuts ~40%. Keep weight on the bar but reduce sets. Friday hinge becomes optional. Last lift Aug 12.',
+    color:'var(--amber)',
+    rows:[
+      {wk:'Wk 15',squat:'245/270×6 — 2 sets',bench:'180/200×6 — 2 sets',dl:'285/315×6 — 2 sets optional',badge:'pb-taper',note:'Taper begins'},
+      {wk:'Wk 16',squat:'245/270×5 — 2 sets',bench:'180/200×5 — 2 sets',dl:'285/310×5 — 2 sets',badge:'pb-taper',note:'Last serious gym week'},
+      {wk:'Wk 17',squat:'235/260×4 — 2 sets',bench:'175/195×4 — 2 sets',dl:'Optional 1 set',badge:'pb-taper',note:'Last heavy session — protect legs'},
+      {wk:'Race Wk',squat:'185/205×5 — activation only',bench:'Skip',dl:'Skip',badge:'pb-taper',note:'Tue only — light and fast, leave feeling fresh'},
+    ]
+  }
+];
+
+// ── CALENDAR RENDER ────────────────────────────────────────────────────────
+const completed = JSON.parse(localStorage.getItem('completed') || '{}');
+
+function saveCompleted() {
+  localStorage.setItem('completed', JSON.stringify(completed));
+}
+
+function buildCalendar() {
+  const container = document.getElementById('calendar-weeks');
+  container.innerHTML = '';
+  weeks.forEach((w, wi) => {
+    const card = document.createElement('div');
+    card.className = 'week-card';
+    card.dataset.phase = w.phase;
+
+    const phaseColors = {1:'#22c55e',2:'#a78bfa',3:'#f59e0b'};
+    const phaseLabels = {1:'Phase 1',2:'Phase 2',3:'Phase 3'};
+
+    card.innerHTML = `
+      <div class="week-header" onclick="toggleWeek(this)">
+        <div>
+          <div class="week-label">${w.wk}</div>
+          <div class="week-date">${w.date}</div>
+        </div>
+        <div class="week-note">
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-right:8px;background:${phaseColors[w.phase]}22;color:${phaseColors[w.phase]}">${phaseLabels[w.phase]}</span>
+          ${w.note}
+        </div>
+        <div class="week-chevron">▾</div>
+      </div>
+      <div class="week-body" id="week-body-${wi}"></div>
+    `;
+
+    const body = card.querySelector(`#week-body-${wi}`);
+    w.days.forEach((d, di) => {
+      const col = document.createElement('div');
+      col.className = 'day-col';
+      let html = `<div class="day-name">${d.n}</div>`;
+      d.blocks.forEach((b, bi) => {
+        const key = `${wi}-${di}-${bi}`;
+        const isDone = completed[key];
+        html += `<div class="block ${b.c}${isDone?' done':''}" onclick="toggleBlock('${key}',this)" title="Click to mark complete">
+          <div class="bt">${b.t}</div>
+          ${b.d?`<div class="bd">${b.d}</div>`:''}
+        </div>`;
+      });
+      col.innerHTML = html;
+      body.appendChild(col);
+    });
+
+    container.appendChild(card);
+  });
+}
+
+function toggleBlock(key, el) {
+  completed[key] = !completed[key];
+  el.classList.toggle('done', completed[key]);
+  saveCompleted();
+}
+
+function toggleWeek(header) {
+  header.parentElement.classList.toggle('collapsed');
+}
+
+function filterPhase(phase) {
+  document.querySelectorAll('.phase-tab').forEach((t,i) => t.classList.toggle('active', i===phase));
+  document.querySelectorAll('.week-card').forEach(card => {
+    card.style.display = (phase === 0 || parseInt(card.dataset.phase) === phase) ? '' : 'none';
+  });
+}
+
+// ── GYM RENDER ────────────────────────────────────────────────────────────
+function buildGym() {
+  const container = document.getElementById('gym-phases');
+  gymPhases.forEach((p, pi) => {
+    const div = document.createElement('div');
+    div.dataset.gymphase = pi;
+    div.style.display = pi === 0 ? '' : 'none';
+    div.innerHTML = `
+      <div class="phase-banner" style="background:${p.color}11;border-color:${p.color}33;margin-bottom:1rem">
+        <h3 style="color:${p.color}">${p.label}</h3>
+        <p style="color:var(--text2)">${p.desc}</p>
+      </div>
+      <table class="gym-table">
+        <thead><tr>
+          <th style="width:80px">Week</th>
+          <th>Tue — Back squat</th>
+          <th>Mon — Bench press</th>
+          <th>Fri — Sumo deadlift</th>
+        </tr></thead>
+        <tbody>
+          ${p.rows.map((r,ri) => `
+            <tr style="cursor:pointer" onclick="toggleGymRow(this)" data-key="gym-${pi}-${ri}">
+              <td class="wk-cell">${r.wk}</td>
+              <td><span class="phase-badge ${r.badge}">↑ Load</span><div class="lift-name">BB Back Squat</div><div class="lift-load">${r.squat}</div>${r.note?`<div class="lift-note">${r.note}</div>`:''}</td>
+              <td><div class="lift-name">BB Bench Press</div><div class="lift-load">${r.bench}</div></td>
+              <td><div class="lift-name">BB Sumo Deadlift</div><div class="lift-load">${r.dl}</div></td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+    container.appendChild(div);
+  });
+}
+
+function filterGym(i) {
+  document.querySelectorAll('.phase-tab').forEach((t,j) => t.classList.toggle('active', j===i));
+  document.querySelectorAll('[data-gymphase]').forEach(d => {
+    d.style.display = parseInt(d.dataset.gymphase) === i ? '' : 'none';
+  });
+}
+
+const gymCompleted = JSON.parse(localStorage.getItem('gymCompleted') || '{}');
+function toggleGymRow(row) {
+  const key = row.dataset.key;
+  gymCompleted[key] = !gymCompleted[key];
+  row.style.opacity = gymCompleted[key] ? '0.4' : '1';
+  row.style.textDecoration = gymCompleted[key] ? 'line-through' : '';
+  localStorage.setItem('gymCompleted', JSON.stringify(gymCompleted));
+}
+
+// ── SECTION NAV ───────────────────────────────────────────────────────────
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function filterMeal(tab) {
+  document.querySelectorAll('.phase-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['schedule','dinner','grocery'][i]===tab);
+  });
+  document.getElementById('meal-schedule').style.display = tab==='schedule' ? '' : 'none';
+  document.getElementById('meal-dinner').style.display   = tab==='dinner'   ? '' : 'none';
+  document.getElementById('meal-grocery').style.display  = tab==='grocery'  ? '' : 'none';
+}
+
+// ── COUNTDOWN ─────────────────────────────────────────────────────────────
+function updateCountdown() {
+  const race = new Date('2026-08-15');
+  const start = new Date('2026-04-14');
+  const now = new Date();
+  const daysOut = Math.ceil((race - now) / 86400000);
+  const total = Math.ceil((race - start) / 86400000);
+  const elapsed = Math.ceil((now - start) / 86400000);
+  const pct = Math.min(100, Math.max(0, Math.round(elapsed/total*100)));
+  document.getElementById('days-out').textContent = Math.max(0, daysOut);
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+buildCalendar();
+buildGym();
+updateCountdown();
+
+// Restore gym row styles
+Object.entries(gymCompleted).forEach(([key, done]) => {
+  if (done) {
+    const row = document.querySelector(`[data-key="${key}"]`);
+    if (row) { row.style.opacity='0.4'; row.style.textDecoration='line-through'; }
+  }
+});
+</script>
+</body>
+</html>
